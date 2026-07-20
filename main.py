@@ -8,7 +8,7 @@ api_key = os.getenv("api_key")
 
 client = OpenAI(api_key=api_key)
 history = []
-
+history.append({"role":"system","content":"You are really helpful assistant."})
 def chat(prompt):
     history.append({"role": "user", "content": prompt})
     response = client.chat.completions.create(
