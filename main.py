@@ -17,15 +17,18 @@ class ChatBot:
             model="gpt-3.5-turbo",
             messages=self.history,
         )
-        return response.choices[0].message.content.strip()
-
-
-
+        self.history.append({"role": "assistant", "content": response.choices[0].message.content.strip()})
+        print("Bot:", response.choices[0].message.content.strip())
+    
+    
+ 
 if __name__ == "__main__":
     chatbot = ChatBot()
     while True:
-        user_question = input("You: ")
-        if user_question.lower() in ["quit", "exit"]:
+        user_input = input("You: ")
+        if user_input.lower() in ["exit", "quit"]:
+            print("Exiting the chat. Goodbye!")
             break
-        response = chatbot.chat(user_question)
-        print(f"Bot: {response}")
+        chatbot.chat(user_input)
+
+  
